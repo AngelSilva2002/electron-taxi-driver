@@ -1,25 +1,25 @@
 {
-  "name": "radio-taxi",
-  "version": "0.1.2",
-  "description": "Aplicación para control de los Taxis en RadioTaxi",
+  "name": "RTT-RadioFrecuencia",
+  "version": "0.2.5",
+  "description": "Aplicación para control de los Taxis en RTT Logistica y transporte S.A.S",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "pack": "build --dir",
-    "build": "build --mac --win",
+    "build": "build --win",
     "build-mac": "build --mac",
     "dist": "build -p always --x64 --ia32",
     "never": "build -p never --x64 --ia32",
     "publish": "build --mac --win -p always",
     "postinstall": "install-app-deps"
   },
-  "repository": "https://github.com/bluesky777/electron-taxi-driver.git",
+  "repository": "https://github.com/AngelSilva2002/Radio-Taxi.git",
   "keywords": [
     "Radio",
     "Taxi",
     "Control"
   ],
-  "author": "Guillermo Marcos",
+  "author": "Angel Guillermo & Joseth David",
   "license": "CC0-1.0",
   "build": {
     "appId": "taxiSystem",
@@ -48,7 +48,7 @@
     },
     "win": {
       "target": "nsis",
-      "icon": "build/icon.ico"
+      "icon": "app/Iconofuturo.ico"
     }
   },
   "dependencies": {
@@ -59,7 +59,8 @@
     "electron-log": "^2.2.16",
     "electron-updater": "^3.0.3",
     "ip": "^1.1.5",
-    "node-excel-export": "^1.4.4"
+    "node-excel-export": "^1.4.4",
+    "table2excel": "^1.0.4"
   },
   "devDependencies": {
     "@angular/cli": "^6.0.5",

@@ -1,3 +1,5 @@
+<script src="assets/js/table2excel.js"></script>
+
 <div class="breadcrumbs no-print">
 	<div class="col-sm-4">
 		<div class="page-header float-left">
@@ -36,6 +38,11 @@
 							<input placeholder="Lugar Inicio" class="col-sm-8 form-control font-16" type="text" ng-model="carrera_nuevo.lugar_inicio"
 								uib-typeahead="direccion.direccion for direccion in direcciones | filter:$viewValue | limitTo:8">
 						</div>
+
+						<div class="row">
+							<div class="col-sm-3">Telefono: </div>
+							<input placeholder="Telefono" class="col-sm-8 form-control font-16" type="text" ng-model="carrera_nuevo.lugar_fin">
+						</div>
 						
 						<div class="row mt-3">
 							<div class="col-sm-3" uib-tooltip="Celular al que llamaron pidiendo el servicio">Celular llamado: </div>
@@ -58,12 +65,12 @@
 						</div>
 
 						<div class="row mt-3">
-							<div class="col-sm-3">Taxi: </div>
+							<div class="col-sm-3">N. interno: </div>
 
 							<div class="col-sm-4 no-padding">
 
 								<ui-select ng-model="carrera_nuevo.taxi" on-select="select_taxista(carrera_nuevo)" style="width: 100%;" theme="bootstrap">
-									<ui-select-match placeholder="Taxi">
+									<ui-select-match placeholder="N. interno">
 										<span ng-bind="$select.selected.rowid + ' (' + $select.selected.numero + ')'"></span>
 									</ui-select-match>
 									<ui-select-choices repeat="item in  taxis |  filter: $select.search track by $index">
@@ -75,13 +82,13 @@
 						</div>
 
 						<div class="row">
-							<div class="col-sm-3">Taxista:</div>
+							<div class="col-sm-3">Conductor:</div>
 
 
 							<div class="col-sm-4 no-padding">
 
 								<ui-select ng-model="carrera_nuevo.taxista" " style=" width: 100%;" theme="bootstrap">
-									<ui-select-match placeholder="Taxista">
+									<ui-select-match placeholder="Conductor">
 										<span ng-bind="$select.selected.nombres + ' ' + $select.selected.apellidos "></span>
 									</ui-select-match>
 									<ui-select-choices repeat="item in  taxistas |  filter: $select.search track by $index">
@@ -101,7 +108,7 @@
 									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z1'">Z1</label>
 									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z2'">Z2</label>
 									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Z3'">Z3</label>
-									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Otro'">Otro</label>
+									<label class="btn btn-primary btn-lg" ng-model="carrera_nuevo.zona" uib-btn-radio="'Otro'">Disponible</label>
 
 								</div>
 							</div>
@@ -159,7 +166,7 @@
 							</div>
 							<div class=" col-sm-3">
 								<label>
-									<input class="" type="radio" name="gender" value="Cancelada" ng-model="carrera_nuevo.estado"> Cancelada<br>
+									<input class="" type="radio" name="gender" value="No realizado" ng-model="carrera_nuevo.estado"> No realizado<br>
 								</label>
 							</div>
 						</div>
@@ -190,8 +197,8 @@
 					<BUTTON class="  btn-estado btn btn-primary " ng-click="finalizada(carrera_estado)" ng-disabled="carrera_estado.estado=='Finalizada'"
 					 style="margin-top: 27px; padding: 10px ">FINALIZADA</BUTTON>
 
-					<BUTTON class="    btn-estado btn btn-primary " ng-click="cancelada(carrera_estado)" ng-disabled="carrera_estado.estado=='Cancelada'"
-					 style="margin-top: 27px; padding: 10px ">CANCELADA</BUTTON>
+					<BUTTON class="    btn-estado btn btn-primary " ng-click="cancelada(carrera_estado)" ng-disabled="carrera_estado.estado=='No realizada'"
+					 style="margin-top: 27px; padding: 10px ">NO REALIZADA</BUTTON>
 
 				</div>
 			</div>
@@ -246,31 +253,85 @@
 							<option value="11">Noviembre</option>
 							<option value="12">Diciembre</option>
 						</select>
-						
+						<input type="button" class="btn btn-success" value="Traer Datos" ng-click="traer_datos(dato)">
+
+						<hr>
+						<h3>Exportar a excel:</h3>
+						<input type="button" class="btn btn-info" value="Cargar a Excel" ng-click="datos_excel(dato)">
 						<input type="button" class="btn btn-info" value="Exportar a Excel" ng-click="exportar_excel(dato)">
-						<input type="button" class="btn btn-info" value="Buscar" ng-click="traer_datos(dato)">
 
 					</div>
 					
 					<div>
 						<input type="text" ng-model="buscando" placeholder="Buscar..." class="form-control col-sm-6 no-print" style="margin-bottom: 20px; font-size: 14px;">
 					</div>
+
+					<div ng-show="false" >
+						<table id="tabla_expo" class="table table1">
+							<tr>
+							<h1>Carreras RTT Transporte y Logistica S.A.S</h1>
+
+							</tr>
+							<thead>
+							  <tr>
+								<th class="th1" scope="col">#</th>
+								<th class="th1" scope="col">N interno</th>
+								<th class="th1" scope="col">Conductor</th>
+								<th class="th1" scope="col">Zona </th>
+								<th class="th1" scope="col">Celular</th>
+								<th class="th1" scope="col">
+								  <sclass="th1" pan uib-tooltip="Registrado por">Por</span>
+								</thclass="th1" >
+								<th class="th1" scope="col">Llamada</th>
+								<th class="th1" scope="col">Dirección</th>
+								<th class="th1" scope="col">Telefono</th>
+								<th class="th1" scope="col">Encuentro</th>
+								<th class="th1" scope="col">Estado</th>
+						  
+							   
+							  </tr>
+							</thead >
+							<tbody>
+							  <tr ng-repeat="carrera2 in carreras2">
+								<th scope="row">{{carrera2.rowid}}</th>
+								<td class="td1" >{{carrera2.numero}}</td>
+								<td class="td1" >{{carrera2.nombres}} {{carrera2.apellidos}}</td>
+								<td class="td1" >{{carrera2.zona}}</td>
+								<td class="td1"ng-click="modificarcarrera(carrera2)" style="font-size: 10pt;">
+								  {{carrera2.cell_llamado}}
+								</td>
+								<td class="td1"	ng-click="modificarcarrera(carrera2)" style="font-size: 10pt;">
+								  {{carrera2.registrada_por}}
+								</td>
+								<td class="td1" ng-click="modificarcarrera(carrera2)">
+								  {{carrera2.fecha_ini | date:'yyyy-MM-dd hh:mm a' }}</td>
+								<TD class="td1"> {{carrera2.lugar_inicio}}</TD>
+								<TD class="td1"> {{carrera2.lugar_fin}}</TD>
+								<TD class="td1">{{carrera2.fecha_fin | date:'yyyy-MM-dd HH:mm'}}</TD>
+								<TD class="td1">{{carrera2.estado}}</TD>
+						   
+						 
+							  </tr>
+							 
+							</tbody>
+						  </table>
+					</div>
 					
-					<table class="table tb-carreras table-condensed">
+					<table id= "" class="table tb-carreras table-condensed">
 						<thead class="thead-dark">
 							<tr>
 								<th scope="col">#</th>
-								<th scope="col">Taxi</th>
-								<th scope="col">Taxista</th>
+								<th scope="col">N. interno</th>
+								<th scope="col">Conductor</th>
 								<th scope="col">Z</th>
 								<th scope="col">Celular</th>
 								<th scope="col">
 									<span uib-tooltip="Registrado por">Por</span>
 								</th>
-								<th scope="col">Llamada</th>
+								<th scope="col">H. Llamada</th>
 								<th scope="col">Dirección</th>
-								<!--<th scope="col">Lugar Fin</th>-->
-								<th scope="col">Encuentro</th>
+								<th scope="col">Telefono</th>
+								<th scope="col">H. Encuentro</th>
 								<th scope="col">Estado</th>
 								<TH class="no-print">Editar</TH>
 
@@ -297,7 +358,7 @@
 								<td ng-click="modificarcarrera(carrera)">
 									{{carrera.fecha_ini | date:'yyyy-MM-dd hh:mm a' }}</td>
 								<td ng-click="modificarcarrera(carrera)"> {{carrera.lugar_inicio}}</td>
-								<!--<td ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</td>-->
+								<td ng-click="modificarcarrera(carrera)">{{carrera.lugar_fin}}</td>
 								<td ng-click="modificarcarrera(carrera, true)">
 									<span ng-show="!carrera.cambiando_hora"> 
 										{{carrera.fecha_fin | date:'yyyy-MM-dd hh:mm a'}}
@@ -374,7 +435,7 @@
 							</div>
 							
 							<div class="row mt-3">
-								<div class="col-sm-3">Taxi: </div>
+								<div class="col-sm-3">N. Interno: </div>
 
 								<div class="col-sm-4 no-padding">
 
@@ -391,7 +452,7 @@
 							</div>
 
 							<div class="row">
-								<div class="col-sm-3">Taxista:</div>
+								<div class="col-sm-3">Conductor:</div>
 
 
 								<div class="col-sm-4 no-padding">
@@ -417,7 +478,7 @@
 										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z1'">Z1</label>
 										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z2'">Z2</label>
 										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Z3'">Z3</label>
-										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Otro'">Otro</label>
+										<label class="btn btn-primary btn-lg" ng-model="carrera_Editar.zona" uib-btn-radio="'Otro'">Disponible</label>
 
 									</div>
 								</div>
@@ -466,7 +527,7 @@
 								</div>
 								<div class=" col-sm-3">
 									<label>
-										<input class="" type="radio" name="gender" value="Cancelada" ng-model="carrera_Editar.estado"> Cancelada
+										<input class="" type="radio" name="gender" value="No realizado" ng-model="carrera_Editar.estado"> No realizado
 									</label>
 								</div>
 							</div>

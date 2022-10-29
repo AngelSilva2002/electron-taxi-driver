@@ -37,8 +37,8 @@ app.controller('TaxistasCtrl', function($scope, $http, $timeout, ConexionServ, $
 			alert('Debe poner sexo');
 			return;
 		}
-		if (taxista_nuevo.documento == undefined) {
-			alert('Debe poner documento');
+		if (taxista_nuevo.celular == undefined) {
+			alert('Debe poner celular');
 			return;
 		}
 		if (taxista_nuevo.usuario == undefined) {
@@ -47,11 +47,6 @@ app.controller('TaxistasCtrl', function($scope, $http, $timeout, ConexionServ, $
 		}
 		if (taxista_nuevo.password == undefined) {
 			alert('Debe poner password');
-			return;
-		}
-
-		if (taxista_nuevo.password.length < 4) {
-			alert('Contraseña con mayor caracteres');
 			return;
 		}
 
@@ -80,6 +75,8 @@ app.controller('TaxistasCtrl', function($scope, $http, $timeout, ConexionServ, $
 			console.log('error', tx);
 		});
 	$scope.ver2 = false;
+	$scope.ocultarboton = true;
+
 
 	}
   $scope.mostrartabla = function(taxista){

@@ -3,7 +3,7 @@ var app = angular.module('TaxisFast');
 app.controller('LoginCtrl', function($scope, $http, $filter, ConexionServ, AuthServ, $state, toastr){
 
 	ConexionServ.createTables();
-
+	
 	$scope.usu = { username: '', password: '' }
 
 	$scope.entrar = function(user){
@@ -32,8 +32,8 @@ app.controller('LoginCtrl', function($scope, $http, $filter, ConexionServ, AuthS
    		ConexionServ.query(consulta, []).then(function(result) {
 			if (result.length == 0) {
 				consulta = "INSERT INTO users(nombres, apellidos, usuario, password, tipo, sexo) VALUES(?,?,?,?,?,?) ";
-				ConexionServ.query(consulta, ['Angel Guillermo', 'Peñarredonda Silva', 'Angelghack',  '123', 'Admin', 'M']).then(function(result) {
-
+				ConexionServ.query(consulta, ['Angel Guillermo', 'Peñarredonda Silva', 'Admin',  '123', 'Admin', 'M']).then(function(result) {
+				console.log("hola")
 				}, function(tx) {
 					console.log("Dato original no insertado", tx);
 				});
@@ -48,7 +48,7 @@ app.controller('LoginCtrl', function($scope, $http, $filter, ConexionServ, AuthS
 
 
     
-	//$scope.insertar_datos_iniciales();
+		$scope.insertar_datos_iniciales();
 	
 	
 

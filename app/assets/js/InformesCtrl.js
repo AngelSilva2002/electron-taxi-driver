@@ -82,10 +82,12 @@ $scope.vertablacarreras = false;
 	})
 
 
-	consulta = 'SELECT *, rowid from taxis where eliminado = 0'
+	consulta = 'SELECT t.*, t.rowid, c.nombres, c.apellidos FROM taxis t ' +
+		'INNER JOIN taxistas c ON t.taxista_id = c.rowid ' +
+		'WHERE t.eliminado ="0" ' +
+		'ORDER BY t.numero';
 	ConexionServ.query(consulta, []).then(function(result){
 		$scope.taxis = result;
-
 	}, function(tx){
 		console.log('error', tx);
 	})

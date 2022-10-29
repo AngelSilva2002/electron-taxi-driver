@@ -31,6 +31,7 @@ app.controller('perfilCtrl', function($scope, $http, $filter, ConexionServ, Auth
 		ConexionServ.query(consulta, [usu.nombres,usu.apellidos, usu.sexo, usu.documento, usu.celular, fecha_nac, "1", usu.rowid]).then(function(result){
 			AuthServ.update_user_storage(usu);
 			toastr.success('Guardado con éxito', 'Guardado');
+			$state.go('panel');
 		}, function(tx){
 			console.log('error', tx);
 			toastr.error('No se pudo guardar');
@@ -53,6 +54,7 @@ app.controller('perfilCtrl', function($scope, $http, $filter, ConexionServ, Auth
 			consulta = 'UPDATE users SET password=?, modificado=? WHERE rowid=?';
 			ConexionServ.query(consulta, [passwords.nuevo, "1", $scope.USER.rowid]).then(function(){
 				toastr.success('Contraseña cambiada');
+				$state.go('panel');
 			}, function(){
 				toastr.error('Contraseña NO cambiada');
 			})

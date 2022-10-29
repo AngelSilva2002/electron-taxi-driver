@@ -70,6 +70,7 @@ angular.module('TaxisFast')
                 tx.executeSql(sqlusers, [], function (tx, result) {
                     console.log('Hasta tabla users creada');
                     defered.resolve('Hasta tabla users creada');
+            
                 }, function(tx,error){
                     console.log("Tabla users NO se pudo crear", error.message);
                 })
@@ -96,6 +97,8 @@ angular.module('TaxisFast')
             });
   
         return defered.promise;
+
+        
         
         },
         query: function(sql, datos, datos_callback){ // datos_callback para los alumnos en for, porque el i cambia

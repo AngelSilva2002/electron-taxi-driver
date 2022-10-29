@@ -100,12 +100,7 @@
                                   <th scope="col">Nombres</th>
                                   <th scope="col">Apellidos</th>
                                   <th scope="col">Sexo</th>
-                                  <th scope="col">Documento</th>
-                                  <th scope="col">Celular</th>
-                                  <th scope="col">Fecha De Nacimiento</th>
-                                  <th scope="col">Usuario</th>
-                                
-                           
+                                  <th scope="col">Celular</th>                           
                                  
                                 </tr>
                               </thead >
@@ -115,10 +110,8 @@
                                   <td>{{taxista.nombres}}</td>
                                   <td>{{taxista.apellidos}}</td>
                                   <td>{{taxista.sexo}}</td>
-                                  <TD>{{taxista.documento}}</TD>
                                    <TD>{{taxista.celular}}</TD>
                                   <TD>{{taxista.fecha_nac | date:'dd/MM/yyyy'}}</TD>
-                                  <TD>{{taxista.usuario}}</TD>
                              
                               
                                 </tr>
@@ -292,13 +285,10 @@
                                <thead></thead>
                                  <tr>
                                   <th scope="col">#</th>
-                                  <th scope="col">Modelo</th>
                                   <th scope="col">Numero</th>
                                   <th scope="col">Placa</th>
-                                  <th scope="col">Propietario</th>
                                   <th scope="col">Conductor</th>
-                                  <th scope="col">Soat</th>
-                                  <th scope="col">Seguro</th>
+              
                             
                                  
                                 </tr>
@@ -306,16 +296,11 @@
                               <tbody>
                                 <tr ng-repeat="taxi in taxis">
                                   <td scope="row">{{taxi.rowid}}</td>
-                                  <td>{{taxi.modelo}}</td>
                                   <td>{{taxi.numero}}</td>
                                   <td>{{taxi.placa}}</td>
-                                  <td>{{taxi.propietario}}</td>
-                                  <td>{{taxi.nombres}} {{taxi.apellidos}} </td>
-                                  <td>{{taxi.Soat}}</td>
-                                  <TD>{{taxi.Seguro}}</TD>
-                                  
+                                  <td>{{taxi.nombres}} {{taxi.apellidos}} </td>                                  
                                 </tr>
-                               
+                        
                               </tbody>
                             </table>
 

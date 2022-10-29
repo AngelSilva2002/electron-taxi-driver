@@ -1,79 +1,292 @@
-        
- 
-    <aside id="left-panel" class="left-panel no-print">
-        <nav class="navbar navbar-expand-sm navbar-default">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Racing+Sans+One&family=Roboto:ital,wght@0,900;1,100;1,900&display=swap" rel="stylesheet">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Sriracha&display=swap');
 
-            <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu" aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" class="no-print">TAXI DRIVER
-              
-                </a>
+  body {
+    margin: 0;
+    box-sizing: border-box;
+  }
 
-                <a class="navbar-brand hidden" href=""></a>
-            </div>
+  /* CSS for header */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f5f5f5;
+  }
 
-            <div id="main-menu" class="main-menu collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active">
-                        <a ui-sref="panel"> <i class="menu-icon fa fa-dashboard"></i>INICIO </a>
-                    </li>
-                    <li>
-                        <a href="" ui-sref="panel.carreras">
-                            
-                            <i class="menu-icon fa fa-flag-checkered"></i>
-                            CARRERAS
+  .header .logo {
+    font-size: 25px;
+    font-family: 'Sriracha', cursive;
+    color: #000;
+    text-decoration: none;
+    margin-left: 30px;
+  }
 
-                        </a>
-                    </li>
+  .nav-items {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #f5f5f5;
+    margin-right: 20px;
+  }
 
-                    <li>
-                        <a ui-sref="panel.informes">
-                            
-                            <i class="menu-icon fa fa-file-pdf-o"></i>
-                            INFORMES
+  .nav-items a {
+    text-decoration: none;
+    color: #000;
+    padding: 35px 20px;
+  }
 
-                        </a>
-                    </li>
-                       <li>
-                        <a ui-sref="panel.nube">
-                            
-                            <i class="menu-icon fa fa-cloud-download"></i>
-                            CAMBIOS
+  /* CSS for main element */
+  .intro {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 520px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('images/imagen4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-                        </a>
-                    </li>
-                         
-                    <h3 class="menu-title">TABLAS</h3><!-- /.menu-title -->
-                           
+  .introf2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 520px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('images/fondortt.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-                    <li ng-show="USER.tipo == 'Admin'">
-                        <a ui-sref="panel.usuarios"> 
-                            <i class="menu-icon fa fa-user "></i>
-                            USUARIOS
-                        </a>
-                    </li>
+  .introf3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 520px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.5) 100%), url('images/imagen4.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
 
-                    <li ng-show="USER.tipo == 'Admin'">
-                        
-                        <a ui-sref="panel.taxistas">
-                            <i class="menu-icon fa fa-address-card-o"></i>
-                            TAXISTAS
-                        </a>
-                    </li>
+  .intro h1 {
+    font-family: sans-serif;
+    font-size: 60px;
+    color: #fff;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .intro p {
+    font-size: 20px;
+    color: #d1d1d1;
+    text-transform: uppercase;
+    margin: 20px 0;
+  }
+
+  .intro button {
+    background-color: #5edaf0;
+    color: #000;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4)
+  }
+
+  .achievements {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 80px;
+  }
+
+  .achievements .work {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .achievements .work i {
+    width: fit-content;
+    font-size: 50px;
+    color: #333333;
+    border-radius: 50%;
+    border: 2px solid #333333;
+    padding: 12px;
+  }
+
+  .achievements .work .work-heading {
+    font-size: 20px;
+    color: #333333;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+
+  .achievements .work .work-text {
+    font-size: 15px;
+    color: #585858;
+    margin: 10px 0;
+  }
+
+  .about-me {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 80px;
+    border-top: 2px solid #eeeeee;
+  }
+
+  .about-me img {
+    width: 500px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+
+  .about-me-text h2 {
+    font-size: 30px;
+    color: #333333;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  .about-me-text p {
+    font-size: 15px;
+    color: #585858;
+    margin: 10px 0;
+  }
+
+  /* CSS for footer */
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #d35308;
+    padding: 40px 80px;
+    border: 20px #d1d1d1;
+  }
+
+  .footer .copy {
+    color: #fff;
+  }
+
+  .bottom-links {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 0;
+  }
+
+  .bottom-links .links {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0 40px;
+  }
+
+  .bottom-links .links span {
+    font-size: 20px;
+    color: #fff;
+    text-transform: uppercase;
+    margin: 10px 0;
+  }
+
+  .bottom-links .links a {
+    text-decoration: none;
+    color: #a1a1a1;
+    padding: 10px 20px;
+  }
+</style>
+
+<aside id="left-panel" class="left-panel no-print">
+  <nav class="navbar navbar-expand-sm navbar-default">
+
+    <div class="navbar-header">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
+        aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fa fa-bars"></i>
+      </button>
+      <a class="navbar-brand" class="no-print">
+
+        <h1 style="font-family: 'Racing Sans One', cursive,'Roboto', sans-serif; font-size: 18px; color: #d35308;">RTT◦</h1>
+        <h2 style="font-family: 'Racing Sans One', cursive,'Roboto', sans-serif; font-size: 14px;">Transporte y logistica SAS</h2>
+
+
+      </a>
+
+      <a class="navbar-brand hidden" href=""></a>
+    </div>
+
+    <div id="main-menu" class="main-menu collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a ui-sref="panel"> <i class="menu-icon fa fa-dashboard"></i>INICIO </a>
+        </li>
+        <li>
+          <a href="" ui-sref="panel.carreras">
+
+            <i class="menu-icon fa fa-flag-checkered"></i>
+            CARRERAS
+
+          </a>
+        </li>
+
+        <li>
+          <a ui-sref="panel.informes">
+
+            <i class="menu-icon fa fa-file-pdf-o"></i>
+            INFORMES
+
+          </a>
+        </li>
+
+
+        <h3 class="menu-title">TABLAS</h3><!-- /.menu-title -->
+
+
+        <li ng-show="USER.tipo == 'Admin'">
+          <a ui-sref="panel.usuarios">
+            <i class="menu-icon fa fa-user "></i>
+            USUARIOS
+          </a>
+        </li>
+
+        <li ng-show="USER.tipo == 'Admin'">
+
+          <a ui-sref="panel.taxistas">
+            <i class="menu-icon fa fa-address-card-o"></i>
+            TAXISTAS
+          </a>
+        </li>
 
 
 
-                    <li ng-show="USER.tipo == 'Admin'">
-                        <a ui-sref="panel.taxis">
-                            <i class="menu-icon fa fa-cab"> </i>
-                            TAXIS
-                        </a>
+        <li ng-show="USER.tipo == 'Admin'">
+          <a ui-sref="panel.taxis">
+            <i class="menu-icon fa fa-cab"> </i>
+            TAXIS
+          </a>
 
-                    </li>
-                
-                    <!--
+        </li>
+
+        <!--
                     <h3  class="menu-title">GEOLOCALIZACION</h3>                    
                     <li>
                         <a ui-sref="panel.GPS">
@@ -83,7 +296,7 @@
                     </li>
                     -->
 
-                    <!-- /.menu-title 
+        <!-- /.menu-title 
                     <h3 ng-show="USER.tipo == 'Admin'" class="menu-title">Extras</h3>
 
                     <li ng-show="USER.tipo == 'Admin'" class="menu-item-has-children dropdown">
@@ -95,27 +308,27 @@
                         </ul>
                     </li>
                     -->
-                </ul>
-            </div><!-- /.navbar-collapse -->
-        </nav>
-    </aside><!-- /#left-panel -->
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
+</aside><!-- /#left-panel -->
 
-    <!-- Left Panel -->
+<!-- Left Panel -->
 <!-- Right Panel -->
 
 <div id="right-panel" class="right-panel" style="width: 100%;">
 
-    <!-- Header-->
-    <header id="header" class="header no-print">
+  <!-- Header-->
+  <header id="header" class="header no-print">
 
-        <div class="header-menu">
+    <div class="header-menu">
 
-            <div class="col-sm-7">
-                <a id="menuToggle" ng-click="calapsar_menu()" class="menutoggle pull-left">
-                    <i class="fa fa fa-tasks"></i>
-                </a>
-                <div class="header-left">
-                    <!--
+      <div class="col-sm-7">
+        <a id="menuToggle" ng-click="calapsar_menu()" class="menutoggle pull-left">
+          <i class="fa fa fa-tasks"></i>
+        </a>
+        <div class="header-left">
+          <!--
                     <button class="search-trigger"><i class="fa fa-search"></i></button>
                     <div class="form-inline">
                         <form class="search-form">
@@ -125,82 +338,87 @@
                     </div>
                     -->
 
-                    <div uib-dropdown class="dropdown for-notification">
-                      <button uib-dropdown-toggle class="btn btn-secondary dropdown-toggle" type="button" id="notification">
-                        <i class="fa fa-bell"></i>
-                        <!--<span class="count bg-danger">5</span>-->
-                      </button>
-                      <div uib-dropdown-menu class="dropdown-menu" aria-labelledby="notification">
-                        <p class="red">Notificaciones</p>
-                        <a class="dropdown-item media bg-flat-color-1" href="" ng-click="descargar_datos()">
-                            <i class="fa fa-check"></i>
-                            <p ng-show="kedarrata">DESCARGAR DATOS INICIALES</p>
-                        </a>
-                
-                      </div>
-                    </div>
+          <div uib-dropdown class="dropdown for-notification">
+            <button uib-dropdown-toggle class="btn btn-secondary dropdown-toggle" type="button" id="notification">
+              <i class="fa fa-bell"></i>
+              <!--<span class="count bg-danger">5</span>-->
+            </button>
 
-                </div>
-            </div>
+          </div>
 
-            <div class="col-sm-5">
-                <div uib-dropdown class="user-area dropdown float-right">
-                    <a uib-dropdown-toggle href="" class="dropdown-toggle">
-                        <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
-                    </a>
-
-                    <div uib-dropdown-menu class="user-menu dropdown-menu">
-                            <a class="nav-link" ui-sref="panel.perfil" ><i class="fa fa-user"></i>Perfil</a>
-
-                
-
-                            <a class="nav-link" href="" ng-click="cerrar_sesion()"><i class="fa fa-power-off"></i>Cerrar sesión</a>
-                    </div>
-                </div>
-            </div>
-        
         </div>
+      </div>
+
+      <div class="col-sm-5">
+        <div uib-dropdown class="user-area dropdown float-right">
+          <a uib-dropdown-toggle href="" class="dropdown-toggle">
+            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+          </a>
+
+          <div uib-dropdown-menu class="user-menu dropdown-menu">
+            <a class="nav-link" ui-sref="panel.perfil"><i class="fa fa-user"></i> Perfil</a>
 
 
-    </header>
+
+            <a class="nav-link" href="" ng-click="cerrar_sesion()"><i class="fa fa-power-off"></i> Cerrar sesión</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+
+  </header>
 
 
 
 
   <div ui-view>
-      
+
 
 
     <div class="breadcrumbs">
-        <div class="col-sm-4">
-            <div class="page-header float-left">
-                <div class="page-title">
-                    <h1></h1>
-                </div>
-            </div>
+      <div class="col-sm-4">
+        <div class="page-header float-left">
+          <div class="page-title">
+            <h1></h1>
+          </div>
         </div>
-        <div class="col-sm-8">
-            <div class="page-header float-right">
-                <div class="page-title">
-                    <ol class="breadcrumb text-right">
-                        <li class="active">Bienvenido       {{USER.usuario}}</li>
-                    </ol>
-                    
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-8">
+        <div class="page-header float-right">
+          <div class="page-title">
+            <ol class="breadcrumb text-right">
+              <li class="active">Bienvenido {{USER.usuario}}</li>
+            </ol>
+
+          </div>
         </div>
+      </div>
     </div>
 
     <div class="content mt-3">
 
-        <div class="col-sm-12">
+      <div class="col-sm-12">
+
+        <main>
+          <div class="intro">
+            <h1 style="font-family: 'Racing Sans One', cursive,'Roboto', sans-serif; font-size: 120px;">RTT</h1>
+            <p style="font-family: 'Racing Sans One', cursive,'Roboto', sans-serif;">TRANSPORTE Y LOGISTICA S.A.S</p>
+            <p>Nit 800173666-9</p>
+          </div>
             
+          <div class="introf2">
+          </div>
+        
+          
+        </main>
+
+        
 
 
-            
 
-
-        </div>
+      </div>
 
 
     </div>
@@ -216,5 +434,12 @@
 
 
 
+
+
 </div> <!-- .content -->
 
+
+<footer style="border-top: 1px #eeeeee solid;" class="footer">
+  <div class="copy">&copy; RTT Transporte y logistica S.A.S</div>
+  <div class="copy">Desarrollado por: Angel Peñarredonda</div>
+</footer>

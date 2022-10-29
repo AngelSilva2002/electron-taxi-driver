@@ -110,7 +110,7 @@
 
     <div class="content mt-3">
       <button class="btn btn-primary btn-lg" ng-show="!ver_crear" ng-click="mostrartabla()">
-        CREAR TAXI
+        Crear Taxi
       </button>
       
       <hr />
@@ -128,27 +128,18 @@
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Modelo</th>
                 <th scope="col">Numero</th>
                 <th scope="col">Placa</th>
-                <th scope="col">Propietario</th>
                 <th scope="col">Conductor</th>
-                <th scope="col">Soat</th>
-                <th scope="col">Seguro</th>
                 <TH>Editar/Eliminar</TH>
               </tr>
             </thead>
             <tbody>
               <tr ng-repeat="taxi in taxis | filter:buscando">
                 <th scope="row">{{ taxi.rowid }}</th>
-                <td>{{ taxi.modelo }}</td>
                 <td>{{ taxi.numero }}</td>
-
                 <td>{{ taxi.placa }}</td>
-                <td>{{ taxi.propietario }}</td>
                 <td>{{ taxi.nombres }} {{ taxi.apellidos }}</td>
-                <td>{{ taxi.Soat }}</td>
-                <TD>{{ taxi.Seguro }}</TD>
                 <TD>
                   <button
                     ng-click="editar(taxi)"

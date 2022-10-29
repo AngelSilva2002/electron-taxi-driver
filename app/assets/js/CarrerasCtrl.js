@@ -1,4 +1,7 @@
+
+
 var app = angular.module("TaxisFast");
+
 
 app.controller("CarrerasCtrl", function(
 	$scope,
@@ -12,7 +15,9 @@ app.controller("CarrerasCtrl", function(
 	$timeout,
 	$http,
 	rutaServidor
+	
 ) {
+	
 	ConexionServ.createTables();
 
 	fecha = new Date();
@@ -40,7 +45,7 @@ app.controller("CarrerasCtrl", function(
 		$scope.carrera_nuevo[campo] = fecha;
 		$scope.carrera_nuevo[campo2] = fecha;
 	};
-
+	$scope.verificar = false;
 	$scope.carrera_Editar = {
 		zona: "Z1",
 		fecha_ini: fecha,
@@ -157,32 +162,162 @@ app.controller("CarrerasCtrl", function(
 	};
 
 
+	$tabla_expo = document.querySelector("#tabla_expo");
 
+	$scope.datos_excel = function(dato){
+		
+		if (dato.select_month ==0) {
+
+			toastr.warning("Debe elegir un mes");
+			return;	
+		}
+
+		$scope.verificar = true; 
+
+		consulta 	= "";
+		fechita 	= window.fixDate(new Date());
+
+		if (dato) {
+			if (dato.select_year && dato.select_year != "0") {
+				fechita = dato.select_year;
+
+				if (dato.select_month && dato.select_month != "0") {
+
+					fechita = fechita + "/" + dato.select_month;
+
+					if (dato.select_day) {
+						fechita = fechita + "/" + dato.select_day;
+					}
+
+				}
+			} else {
+				fechita = "";
+			}
+		}
+
+		consulta = "SELECT c.*, c.rowid, t.nombres, t.apellidos, tx.numero from carreras c " +
+			"INNER JOIN taxistas t ON c.taxista_id = t.rowid " +
+			"INNER JOIN taxis tx ON c.taxi_id = tx.rowid " +
+			'WHERE c.eliminado = "0" and fecha_ini like "' + fechita + '%" ' +
+			"order by c.rowid desc";
+
+		ConexionServ.query(consulta).then(function(result) {
+				$scope.carreras2 = result;
+				for (var i = 0; i < $scope.carreras2.length; i++) {
+					$scope.carreras2[i].fecha_ini = new Date($scope.carreras2[i].fecha_ini);
+					$scope.carreras2[i].fecha_fin = new Date($scope.carreras2[i].fecha_fin);
+				}
+		}, function(tx) {
+				console.log("error", tx);
+		});
+	
+	
+		consulta = 'SELECT distinct(cell_llamado) as cell_llamado FROM carreras WHERE eliminado = "0" and cell_llamado is not null';
+		ConexionServ.query(consulta, []).then(function(result) {
+			$scope.celulares = result;
+		}, function(tx) {
+			console.log("error celulares", tx);
+		});
+		
+		consulta = 'SELECT distinct(lugar_inicio) as direccion FROM carreras WHERE eliminado = "0" and lugar_inicio is not null and lugar_inicio!="" ';
+		ConexionServ.query(consulta, []).then(function(result) {
+			$scope.direcciones = result;
+		}, function(tx) {
+			console.log("error celulares", tx);
+		});
+
+		mes_seleccionado = '';
+
+		if(dato.select_month=="0"){
+			mes_seleccionado = "Cualquier Mes"
+		}else if(dato.select_month=="01"){
+			mes_seleccionado = "Enero"
+		}else if(dato.select_month== "02"){
+			mes_seleccionado = "Febrero"
+		}else if(dato.select_month== "03"){
+			mes_seleccionado = "Marzo"
+		}else if(dato.select_month== "04"){
+			mes_seleccionado = "Abril"
+		}else if(dato.select_month== "05"){
+			mes_seleccionado = "Mayo"
+		}else if(dato.select_month== "06"){
+			mes_seleccionado = "Junio"
+		}else if(dato.select_month== "07"){
+			mes_seleccionado = "Julio"
+		}else if(dato.select_month== "08"){
+			mes_seleccionado = "Agosto"
+		}else if(dato.select_month== "09"){
+			mes_seleccionado = "Septiembre"
+		}else if(dato.select_month== "10"){
+			mes_seleccionado = "Octubre"
+		}else if(dato.select_month== "11"){
+			mes_seleccionado = "Noviembre"
+		}else if(dato.select_month== "12"){
+			mes_seleccionado = "Diciembre"
+		}
+
+		toastr.success("Carreras de " + mes_seleccionado + " cargadas, ahora puedes exportarlas!");
+	}
 
 	$scope.exportar_excel = function(dato) {
 
-		if (parseInt(dato.select_month) == 0) {
-			toastr.warning('Seleccione el mes.');
-			return;
+
+
+		mes_seleccionado = '';
+
+		if(dato.select_month=="0"){
+			mes_seleccionado = "Cualquier Mes"
+		}else if(dato.select_month=="01"){
+			mes_seleccionado = "Enero"
+		}else if(dato.select_month== "02"){
+			mes_seleccionado = "Febrero"
+		}else if(dato.select_month== "03"){
+			mes_seleccionado = "Marzo"
+		}else if(dato.select_month== "04"){
+			mes_seleccionado = "Abril"
+		}else if(dato.select_month== "05"){
+			mes_seleccionado = "Mayo"
+		}else if(dato.select_month== "06"){
+			mes_seleccionado = "Junio"
+		}else if(dato.select_month== "07"){
+			mes_seleccionado = "Julio"
+		}else if(dato.select_month== "08"){
+			mes_seleccionado = "Agosto"
+		}else if(dato.select_month== "09"){
+			mes_seleccionado = "Septiembre"
+		}else if(dato.select_month== "10"){
+			mes_seleccionado = "Octubre"
+		}else if(dato.select_month== "11"){
+			mes_seleccionado = "Noviembre"
+		}else if(dato.select_month== "12"){
+			mes_seleccionado = "Diciembre"
 		}
 
-		defaultFileName = 'Carreras ' + dato.select_month + '/' + dato.select_year + '.xls';
+		console.log(mes_seleccionado);
+
+
+		if ($scope.verificar == false) {
+
+			toastr.warning("Debes cargar primero los datos");
+			return;	
+		}
 		
-		$http.get(rutaServidor.ruta + 'taxis/exportar-carreras', {params: dato, responseType: "blob"} ).then( function(data){
-			type          = data.headers('Content-Type');
-			disposition   = data.headers('Content-Disposition');
-			if (disposition)
-				match = disposition.match(/.*filename=\"?([^;\"]+)\"?.*/);
-				if (match[1])
-					defaultFileName = match[1];
+		defaultFileName = 'Carreras ' + mes_seleccionado + '/' + dato.select_year + '.xls';
+			$("#tabla_expo").table2excel({
+			
+			sheetName: "Carreras",
+			name: "Carreras",
+			fileext: ".xls",
+			filename: defaultFileName , // do include extension
+			exclude_img: false,
+			exclude_links: true,
+			exclude_inputs: true,
+			preserveColors: true
 
-			defaultFileName = defaultFileName.replace(/[<>:"\/\\|?*]+/g, '_')
-			blob = new Blob([data.data], { type: type });
-			window.saveAs(blob, defaultFileName);
-
-		}, function(r2){
-			console.log(r2);
 		});
+
+		$scope.verificar = false;
+		toastr.success("Carreras exportadas")
 	}
 
 
@@ -416,10 +551,10 @@ app.controller("CarrerasCtrl", function(
 
 	$scope.cancelada = function(carrera_estado) {
 		consulta = 'UPDATE carreras SET estado=?,  modificado="1" where rowid=? ';
-		ConexionServ.query(consulta, ["Cancelada", carrera_estado.rowid]).then(
+		ConexionServ.query(consulta, ["No realizada", carrera_estado.rowid]).then(
 			function(result) {
 				console.log("se cargo la carrera", result);
-				carrera_estado.estado = "Cancelada";
+				carrera_estado.estado = "No realizada";
 			},
 			function(tx) {
 				console.log("error", tx);
